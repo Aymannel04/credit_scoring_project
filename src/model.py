@@ -43,6 +43,11 @@ def train_model():
     print("\nDétails par classe :")
     print(classification_report(y_test, predictions, target_names=['Bon Client', 'Mauvais Client']))
 
+    from sklearn.metrics import roc_auc_score
+    y_pred_proba = model.predict_proba(X_test)[:, 1]
+    auc = roc_auc_score(y_test, y_pred_proba)
+    print(f"AUC-ROC : {auc:.4f}")
+    
     # 5. La Matrice de Confusion (Cruciale pour la banque)
     cm = confusion_matrix(y_test, predictions)
     
