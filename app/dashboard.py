@@ -19,11 +19,11 @@ def load_assets():
 try:
     model, scaler, encoders = load_assets()
 except FileNotFoundError:
-    st.error("❌ Fichiers manquants. As-tu bien lancé src/process.py et src/model.py ?")
+    st.error("Fichiers manquants. As-tu bien lancé src/process.py et src/model.py ?")
     st.stop()
 
 # 3. Interface Latérale (Saisie Banquier)
-st.sidebar.header("🏦 Profil du Client")
+st.sidebar.header("Profil du Client")
 st.sidebar.markdown("Entrez les infos du demandeur de crédit.")
 
 def user_input_features():
@@ -90,7 +90,7 @@ input_df = input_df[expected_cols]
 input_scaled = scaler.transform(input_df)
 
 # 5. Prédiction & SHAP
-st.title("📊 Analyse de Risque Crédit")
+st.title("Analyse de Risque Crédit")
 
 col1, col2 = st.columns(2)
 
@@ -101,10 +101,10 @@ prob = model.predict_proba(input_scaled)[0][1] # Probabilité d'être "Mauvais" 
 with col1:
     st.subheader("Verdict de l'IA")
     if prediction == 0:
-        st.success("✅ CRÉDIT ACCORDÉ")
+        st.success("CRÉDIT ACCORDÉ")
         st.metric("Score de Confiance", f"{(1-prob)*100:.1f}% Sûr")
     else:
-        st.error("🚨 CRÉDIT REFUSÉ")
+        st.error("CRÉDIT REFUSÉ")
         st.metric("Probabilité de Défaut", f"{prob*100:.1f}% Risqué")
 
 # --- Explication (SHAP) ---
@@ -128,5 +128,5 @@ with col2:
 
 # --- Données Brutes ---
 st.markdown("---")
-st.subheader("🔍 Données du Client (Traitées)")
+st.subheader("Données du Client (Traitées)")
 st.dataframe(input_df)

@@ -4,7 +4,7 @@ import requests
 import io
 
 def load_german_credit_data():
-    print("📥 Téléchargement du dataset 'German Credit'...")
+    print("Téléchargement du dataset 'German Credit'...")
     
     # URL directe vers la version brute
     url = "https://archive.ics.uci.edu/ml/machine-learning-databases/statlog/german/german.data"
@@ -34,7 +34,7 @@ def load_german_credit_data():
         df['target'] = df['risk'].map({1: 0, 2: 1})
         df = df.drop(columns=['risk'])
         
-        print(f"✅ Données récupérées : {df.shape[0]} clients.")
+        print(f"Données récupérées : {df.shape[0]} clients.")
         
         # Vérification du déséquilibre
         count = df['target'].value_counts()
@@ -43,15 +43,15 @@ def load_german_credit_data():
         print(f"Mauvais clients (1) : {count[1]}")
         
         taux_defaut = (count[1] / len(df)) * 100
-        print(f"⚠️ Taux de défaut   : {taux_defaut:.2f}%")
+        print(f"Taux de défaut   : {taux_defaut:.2f}%")
         
         # Sauvegarde
         os.makedirs('data/raw', exist_ok=True)
         df.to_csv('data/raw/german_credit.csv', index=False)
-        print("📁 Sauvegardé dans data/raw/german_credit.csv")
+        print("Sauvegardé dans data/raw/german_credit.csv")
         
     except Exception as e:
-        print(f"❌ Erreur : {e}")
+        print(f"Erreur : {e}")
 
 if __name__ == "__main__":
     load_german_credit_data()

@@ -7,13 +7,13 @@ import os
 import joblib
 
 def process_data():
-    print("⚙️ Démarrage du prétraitement...")
+    print(" Démarrage du prétraitement...")
     
     # 1. Chargement
     try:
         df = pd.read_csv('data/raw/german_credit.csv')
     except FileNotFoundError:
-        print("❌ Erreur : Fichier data/raw/german_credit.csv introuvable.")
+        print("Erreur : Fichier data/raw/german_credit.csv introuvable.")
         return
 
     # 2. Séparation Target / Features
@@ -65,7 +65,7 @@ def process_data():
     pd.DataFrame(X_test_final, columns=X.columns).to_csv('data/processed/X_test.csv', index=False)
     pd.DataFrame(y_test).to_csv('data/processed/y_test.csv', index=False)
 
-    print("✅ Données traitées et sauvegardées dans data/processed/")
+    print("Données traitées et sauvegardées dans data/processed/")
 
 if __name__ == "__main__":
     process_data()

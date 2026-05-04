@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def train_model():
-    print("🧠 Entraînement du modèle de Risque Crédit (XGBoost)...")
+    print("Entraînement du modèle de Risque Crédit (XGBoost)...")
 
     # 1. Chargement des données préparées
     try:
@@ -16,7 +16,7 @@ def train_model():
         X_test = pd.read_csv('data/processed/X_test.csv')
         y_test = pd.read_csv('data/processed/y_test.csv').values.ravel()
     except FileNotFoundError:
-        print("❌ Erreur : Données introuvables. Lance src/process.py d'abord.")
+        print("Erreur : Données introuvables. Lance src/process.py d'abord.")
         return
 
     # 2. Création du modèle XGBoost
@@ -36,7 +36,7 @@ def train_model():
     # 4. Évaluation (Le moment de vérité)
     predictions = model.predict(X_test)
     
-    print("\n📊 --- RAPPORT DE PERFORMANCE ---")
+    print("\n--- RAPPORT DE PERFORMANCE ---")
     acc = accuracy_score(y_test, predictions)
     print(f"Précision Globale (Accuracy) : {acc*100:.2f}%")
     
@@ -53,16 +53,16 @@ def train_model():
     
     # On affiche les chiffres bruts
     tn, fp, fn, tp = cm.ravel()
-    print("\n🚨 ANALYSE DES RISQUES (Sur les données de test) :")
-    print(f"✅ Vrais Bons (Crédits accordés à raison) : {tn}")
-    print(f"❌ Faux Mauvais (Clients refusés à tort - Manque à gagner) : {fp}")
-    print(f"💰 Vrais Mauvais (Défauts évités - Argent sauvé !) : {tp}")
-    print(f"💀 Faux Bons (Crédits accordés à tort - PERTE SÈCHE) : {fn}")
+    print("\n ANALYSE DES RISQUES (Sur les données de test) :")
+    print(f"Vrais Bons (Crédits accordés à raison) : {tn}")
+    print(f"Faux Mauvais (Clients refusés à tort - Manque à gagner) : {fp}")
+    print(f"Vrais Mauvais (Défauts évités - Argent sauvé !) : {tp}")
+    print(f"Faux Bons (Crédits accordés à tort - PERTE SÈCHE) : {fn}")
 
     # 6. Sauvegarde
     os.makedirs('models', exist_ok=True)
     joblib.dump(model, 'models/credit_xgb_model.pkl')
-    print("\n💾 Modèle sauvegardé : models/credit_xgb_model.pkl")
+    print("\n Modèle sauvegardé : models/credit_xgb_model.pkl")
 
 if __name__ == "__main__":
     train_model()
